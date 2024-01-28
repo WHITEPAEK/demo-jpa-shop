@@ -8,9 +8,12 @@ import com.whitepaek.demojpashop.domain.item.Item;
 import com.whitepaek.demojpashop.repository.ItemRepository;
 import com.whitepaek.demojpashop.repository.MemberRepository;
 import com.whitepaek.demojpashop.repository.OrderRepository;
+import com.whitepaek.demojpashop.repository.OrderSearch;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -58,6 +61,10 @@ public class OrderService {
 
         // 주문 취소
         order.cancel();
+    }
+
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderRepository.findAllByString(orderSearch);
     }
 
 }
